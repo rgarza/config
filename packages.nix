@@ -10,6 +10,8 @@
       jdk
       maven
       flyctl
-      postgresql
+      postgresql_14
+      docker
+      docker-compose
     ];
 }
