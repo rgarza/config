@@ -1,19 +1,26 @@
 { config, pkgs, lib, ... }:
-
+#let custompkgs = import /Users/rd/code/nixpkgs/default.nix {}; in
 {
+  
   imports = [ <home-manager/nix-darwin> ];
   environment.systemPackages = with pkgs; [ ];
   home-manager.useUserPackages = false;
   environment.darwinConfig = "$HOME/.nixpkgs/darwin-configuration.nix";
-
+  services.nix-daemon.enable = true;
   home-manager.useGlobalPkgs = true;
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
+  };
   users.users.rd = {
     name = "rd";
     home = "/Users/rd";
   };
 
   home-manager.users.rd = { pkgs, ... }: {
-    
+
     imports = [
       ./packages.nix
       ./configs/zsh/zsh.nix

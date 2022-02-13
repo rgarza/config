@@ -1,12 +1,14 @@
 { pkgs, ... }:
 {
     programs.zsh = {
-        initExtra = ''     
-            export PATH=/var/run/current-system/sw/bin/:$PATH:/usr/local/bin
+        initExtra = ''
+   	export SSH_AUTH_SOCK=/Users/rd/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh	
+            export PATH=/var/run/current-system/sw/bin/:$HOME/.nix-profile/bin:$PATH:/usr/local/bin
             if [[ -r "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
             source "$HOME/.nix-profile/etc/profile.d/nix.sh"
             fi        
             source ${./p10k.zsh}
+            
         '';
         enable = true;
         enableAutosuggestions = true;
