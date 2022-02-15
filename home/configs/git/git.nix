@@ -4,5 +4,8 @@
         enable = true;
         userName = "rgarza";
         userEmail = "rene@r3n3.co";
+        ignores = [
+            ".DS_Store"
+        ];
     };
 }
