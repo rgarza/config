@@ -12,11 +12,6 @@
     darwin.inputs.nixpkgs.follows = "nixpkgs-unstable";
     home-manager.url = github:nix-community/home-manager;
     home-manager.inputs.nixpkgs.follows = "nixpkgs-unstable";
-
-    # Other sources
-    flake-compat = { url = github:edolstra/flake-compat; flake = false; };
-    flake-utils.url = github:numtide/flake-utils;
-    moses-lua = { url = github:Yonaba/Moses; flake = false; };
   };
 
   outputs = { self, darwin, home-manager, flake-utils, ... }@inputs:
