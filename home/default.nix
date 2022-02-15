@@ -1,8 +1,5 @@
 { config, pkgs, lib, ... }:
-#let custompkgs = import /Users/rd/code/nixpkgs/default.nix {}; in
 {
-  
-
     imports = [
       ./packages.nix
       ./configs/zsh/zsh.nix
