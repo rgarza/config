@@ -1,5 +1,5 @@
 {
-  description = "Malo’s Nix system configs, and some other useful stuff.";
+  description = "Nix system configs.";
 
   inputs = {
     # Package sets
