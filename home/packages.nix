@@ -1,6 +1,7 @@
 { pkgs, ... }:
 {
     home.packages = with pkgs; [    
+      pkgs-unstable.git
       binutils
       coreutils
       vim
