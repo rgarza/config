@@ -4,7 +4,6 @@
   inputs = {
     # Package sets
     nixpkgs-master.url = github:NixOS/nixpkgs/master;
-    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-21.11-darwin;
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
 
     # Environment/system management
@@ -119,7 +118,7 @@
             inherit (nixpkgsConfig) config;
           };
         };
-
+  
         # Overlay useful on Macs with Apple Silicon
         apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
           # Add access to x86 packages system is running Apple Silicon
@@ -127,7 +126,9 @@
             system = "x86_64-darwin";
             inherit (nixpkgsConfig) config;
           };
-        };     
+        };
+        
+        pythonPackages = import ./overlays/python.nix;     
        
       };
 
