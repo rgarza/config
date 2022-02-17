@@ -5,7 +5,6 @@
    #   ./configs/zsh/zsh.nix
       ./configs/git/git.nix
       ./shells.nix
-      ./kitty.nix
     ];
 
     programs.bat.enable = true;

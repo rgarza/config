@@ -1,6 +1,6 @@
 {pkgs, ...}:
 final: prev:
-
+# needed because of https://github.com/NixOS/nixpkgs/issues/160133
 let
   inherit (prev) python3 fetchFromGitHub;
   inherit (prev.python3.pkgs) buildPythonApplication;

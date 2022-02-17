@@ -3,7 +3,6 @@
     home.packages = with pkgs; [    
       git
       fish
-      kitty
       binutils
       coreutils
       vim

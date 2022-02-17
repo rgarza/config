@@ -25,7 +25,7 @@
         overlays = attrValues self.overlays ++ singleton (
           final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
             inherit (final.pkgs-x86)
-              starship;
+              starship; # using version because https://github.com/NixOS/nixpkgs/pull/159937
           })
         );
       };
@@ -111,7 +111,6 @@
             inherit (nixpkgsConfig) config;
           };
         };   
-        colors = import ./overlays/colors.nix;
 
         ipythonFix = self: super: {
           python3 = super.python3.override {
@@ -138,11 +137,7 @@
       };
 
       homeManagerModules = {
-        configs-git-aliases = import ./home/configs/git/git-aliases.nix;
-        configs-gh-aliases = import ./home/configs/git/gh-aliases.nix;   
         configs-starship-symbols = import ./home/configs/starship-symbols.nix;   
-        programs-kitty-extras = import ./modules/home/programs/kitty/extras.nix;
-
       };      
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = import inputs.nixpkgs {
