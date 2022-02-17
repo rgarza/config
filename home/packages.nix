@@ -1,13 +1,14 @@
-{ pkgs, ... }:
+{ pkgs, apple-silicon, ... }:
 {
     home.packages = with pkgs; [    
-      pkgs-unstable.git
+      git
+      fish
+      kitty
       binutils
       coreutils
       vim
       wget  
       nodejs-14_x
-      zsh-powerlevel10k
       jdk
       maven
       flyctl

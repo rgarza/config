@@ -1,8 +1,9 @@
-{ pkgs, ... }:
+{ pkgs, lib,  ... }:
 {
     programs.zsh = {
         initExtra = ''
-   	export SSH_AUTH_SOCK=/Users/rd/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh	
+            export ZSH_DISABLE_COMPFIX="true"
+   	        export SSH_AUTH_SOCK=/Users/rd/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh	
             export PATH=/var/run/current-system/sw/bin/:$HOME/.nix-profile/bin:$PATH:/usr/local/bin
             if [[ -r "$HOME/.nix-profile/etc/profile.d/nix.sh" ]]; then
             source "$HOME/.nix-profile/etc/profile.d/nix.sh"
@@ -13,7 +14,7 @@
         enable = true;
         enableAutosuggestions = true;
         enableCompletion = true;
-
+        
         history = {
             expireDuplicatesFirst = true;            
             extended = true;
