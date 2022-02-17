@@ -1,1 +1,1 @@
-Based on https://github.com/malob/nixpkgs
+nix confuration for MacOS Based on https://github.com/malob/nixpkgs
