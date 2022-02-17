@@ -21,6 +21,9 @@
       # Set `bat` colors based on value of `$term_backdround` when shell starts up.
       set-bat-colors
     '';
+    
+   
+    programs.nix-index.enable = true;
 
     programs.home-manager = {
       enable = true;
