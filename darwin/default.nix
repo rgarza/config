@@ -7,6 +7,7 @@
   ];
   imports = [
     ./bootstrap.nix
+    ./homebrew.nix
   ];
 
 
