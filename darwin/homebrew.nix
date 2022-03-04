@@ -30,6 +30,8 @@
     };
     homebrew.casks = [
         "secretive"
+        "vlc"
+        "transmission"
     ];
 
     environment.variables.SSH_AUTH_SOCK = "/Users/${config.users.primaryUser}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";
