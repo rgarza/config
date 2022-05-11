@@ -23,9 +23,9 @@
       nixpkgsConfig = {
         config = { allowUnfree = true; };
         overlays = attrValues self.overlays ++ singleton (
-          final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
-            inherit (final.pkgs-x86)
-              starship; # using version because https://github.com/NixOS/nixpkgs/pull/159937
+          final: prev: ({
+            inherit (final.pkgs-master)
+              flyctl;
           })
         );
       };
@@ -62,11 +62,10 @@
     {
 
       darwinConfigurations = rec {    
-        bootstrap-x86 = makeOverridable darwinSystem {
-          system = "x86_64-darwin";
+        bootstrap-arm = makeOverridable darwinSystem {
+          system = "aarch64-darwin";
           modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsConfig; } ];
         };    
-        bootstrap-arm = bootstrap-x86.override { system = "aarch64-darwin"; };
 
         mb = darwinSystem {
           system = "aarch64-darwin";
@@ -85,11 +84,11 @@
       };
 
       overlays = {
-        # Overlays to add different versions `nixpkgs` into package set
         pkgs-master = final: prev: {
           pkgs-master = import inputs.nixpkgs-master {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
+            
           };
         };
         pkgs-stable = final: prev: {
@@ -104,29 +103,34 @@
             inherit (nixpkgsConfig) config;
           };
         };
-  
+        
         apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
           pkgs-x86 = import inputs.nixpkgs {
             system = "x86_64-darwin";
             inherit (nixpkgsConfig) config;
+            # overlays = attrValues self.overlays ++ singleton (
+            #   final: prev: (optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
+            #     inherit (final.pkgs-x86)
+            #       starship; # using version because https://github.com/NixOS/nixpkgs/pull/159937
+            #   })
+            # );
           };
         };   
-
-        ipythonFix = self: super: {
-          python3 = super.python3.override {
-            packageOverrides = pySelf: pySuper: {
-              ipython = pySuper.ipython.overridePythonAttrs (old: {
-                preCheck = old.preCheck + super.lib.optionalString super.stdenv.isDarwin ''
-                  echo '#!${super.stdenv.shell}' > pbcopy
-                  chmod a+x pbcopy
-                  cp pbcopy pbpaste
-                  export PATH="$(pwd)''${PATH:+":$PATH"}"
-                '';
-              });
-            };
-            self = self.python3;
-          };
-        };
+        # ipythonFix = self: super: {
+        #   python3 = super.python3.override {
+        #     packageOverrides = pySelf: pySuper: {
+        #       ipython = pySuper.ipython.overridePythonAttrs (old: {
+        #         preCheck = old.preCheck + super.lib.optionalString super.stdenv.isDarwin ''
+        #           echo '#!${super.stdenv.shell}' > pbcopy
+        #           chmod a+x pbcopy
+        #           cp pbcopy pbpaste
+        #           export PATH="$(pwd)''${PATH:+":$PATH"}"
+        #         '';
+        #       });
+        #     };
+        #     self = self.python3;
+        #   };
+        # };
       };
 
      

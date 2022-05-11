@@ -21,6 +21,7 @@
   # Auto upgrade nix package and the daemon service.
   services.nix-daemon.enable = true;
 
+
   programs.fish.enable = true;
   programs.fish.useBabelfish = true;
   programs.fish.babelfishPackage = pkgs.babelfish;

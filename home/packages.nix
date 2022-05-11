@@ -1,4 +1,4 @@
-{ pkgs, apple-silicon, ... }:
+{ pkgs, pkgs-master, apple-silicon, ... }:
 {
     home.packages = with pkgs; [    
       git
@@ -8,11 +8,12 @@
       vim
       wget  
       nodejs-14_x
-      jdk
+      openjdk
       maven
       flyctl
       postgresql_14
       docker
       docker-compose
+      yarn
     ];
 }

@@ -20,6 +20,8 @@
       set-bat-colors
     '';
     
+    programs.direnv.enable = true;
+    programs.direnv.nix-direnv.enable = true;
    
     programs.nix-index.enable = true;
 
