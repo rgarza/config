@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
     nixpkgs-master.url = github:NixOS/nixpkgs/master;
-    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-21.11-darwin;
+    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-22.05-darwin;
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
 
     # Environment/system management
@@ -32,12 +32,18 @@
 
       homeManagerStateVersion = "22.05";
       homeManagerCommonConfig = {
-        imports = attrValues self.homeManagerModules ++ [
+         imports = attrValues self.homeManagerModules ++ [
           ./home
           { home.stateVersion = homeManagerStateVersion; }
         ];
       };
 
+    primaryUserInfo = {
+      username = "rd";
+      fullName = "Rene de la Garza";
+      email = "rene@r3n3.co";
+      nixConfigDirectory = "/Users/rd/.nixpkgs";
+    };
       # Modules shared by most `nix-darwin` personal configurations.
       nixDarwinCommonModules = attrValues self.darwinModules ++ [
         ./darwin
@@ -49,10 +55,21 @@
           in
           {
             nixpkgs = nixpkgsConfig;
-            nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };
-            users.users.${primaryUser}.home = "/Users/${primaryUser}";
+            # nix.nixPath = { nixpkgs = "$HOME/.config/nixpkgs/nixpkgs.nix"; };
+            nix.nixPath = { nixpkgs = "${inputs.nixpkgs-unstable}"; };
+            users.users.${primaryUser.username}.home = "/Users/${primaryUser.username}";
             home-manager.useGlobalPkgs = true;
-            home-manager.users.${primaryUser} = homeManagerCommonConfig;
+
+            home-manager.users.${primaryUser.username} = homeManagerCommonConfig;
+            
+            # {
+            #   imports = attrValues self.homeManagerModules ++ [
+            #     ./home
+            #   ];
+            #   home.stateVersion = homeManagerStateVersion;
+            #   home.user-info = config.users.primaryUser;
+            # };            
+            
             nix.registry.my.flake = self;
           }
         )
@@ -71,7 +88,7 @@
           system = "aarch64-darwin";
           modules = nixDarwinCommonModules ++ [
             {
-              users.primaryUser = "rd";
+              users.primaryUser = primaryUserInfo;
               networking.computerName = "mb 💻";
               networking.hostName = "mb";
               networking.knownNetworkServices = [
@@ -116,6 +133,21 @@
             # );
           };
         };   
+        vimUtils = import ./overlays/vimUtils.nix;
+
+        vimPlugins = final: prev:
+          let
+            inherit (self.overlays.vimUtils final prev) vimUtils;
+          in
+          {
+            vimPlugins = prev.vimPlugins.extend (_: _:
+              vimUtils.buildVimPluginsFromFlakeInputs inputs [
+                # Add flake input name here
+              ]
+            );
+          };
+        
+
         # ipythonFix = self: super: {
         #   python3 = super.python3.override {
         #     packageOverrides = pySelf: pySuper: {
@@ -137,11 +169,19 @@
       darwinModules = {
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
         security-pam = import ./modules/darwin/security/pam.nix;
-        users = import ./modules/darwin/users.nix;
+        users-primaryUser = import ./modules/darwin/users.nix;
       };
 
       homeManagerModules = {
         configs-starship-symbols = import ./home/configs/starship-symbols.nix;   
+        configs-neovim = import ./home/neovim.nix;
+        # programs-neovim-extras = import ./modules/home/programs/neovim/extras.nix;
+
+        home-user-info = { lib, ... }: {
+          options.home.user-info =
+            (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
+        };
+
       };      
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = import inputs.nixpkgs {

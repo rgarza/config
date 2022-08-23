@@ -4,10 +4,11 @@
       git
       fish
       binutils
+      hugo
       coreutils
       vim
       wget  
-      nodejs-14_x
+      nodejs-16_x
       openjdk
       maven
       flyctl
@@ -15,5 +16,8 @@
       docker
       docker-compose
       yarn
+      cocoapods
+      wrangler
+      tmux
     ];
 }
