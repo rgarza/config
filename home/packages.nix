@@ -8,7 +8,7 @@
       coreutils
       vim
       wget  
-      nodejs-16_x
+      nodejs-14_x
       openjdk
       maven
       flyctl

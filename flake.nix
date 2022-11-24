@@ -168,7 +168,7 @@
      
       darwinModules = {
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
-        security-pam = import ./modules/darwin/security/pam.nix;
+        # security-pam = import ./modules/darwin/security/pam.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
       };
 
@@ -187,11 +187,26 @@
       legacyPackages = import inputs.nixpkgs {
         inherit system;
         inherit (nixpkgsConfig) config;
-        overlays = with self.overlays; [
+        overlays = attrValues {
+          inherit (self.overlays)
           pkgs-master
           pkgs-stable
-          apple-silicon
-        ];
+          apple-silicon;
+        };
+      };
+
+      devShells =
+      let
+        pkgs = self.legacyPackages.${system};
+      in
+      {
+        python = pkgs.mkShell {
+          name = "python310";
+          inputsFrom = attrValues {
+            inherit (pkgs.pkgs-master.python310Packages) black isort;
+            inherit (pkgs) poetry python310 pyright;
+          };
+        };
       };
     });
 }

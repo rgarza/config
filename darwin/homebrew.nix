@@ -20,10 +20,10 @@
         "homebrew/cask-drivers"
     ];
     homebrew.enable = true;
-    homebrew.autoUpdate = true;
-    homebrew.cleanup = "zap";
+    homebrew.onActivation.autoUpdate = true;
+    homebrew.onActivation.upgrade = true;
+    homebrew.onActivation.cleanup = "zap";
     homebrew.global.brewfile = true;
-    homebrew.global.noLock = true;
     homebrew.masApps = {
         "BitWarden" = 1352778147;
         "Wireguard" = 1451685025;
