@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
     nixpkgs-master.url = github:NixOS/nixpkgs/master;
-    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-22.05-darwin;
+    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-22.11-darwin;
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
 
     # Environment/system management
@@ -30,7 +30,7 @@
         );
       };
 
-      homeManagerStateVersion = "22.05";
+      homeManagerStateVersion = "23.05";
       homeManagerCommonConfig = {
          imports = attrValues self.homeManagerModules ++ [
           ./home
