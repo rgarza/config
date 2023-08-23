@@ -3,6 +3,8 @@ let inherit (lib) mkDefault; in
 {
   programs.starship.settings = {
     aws.symbol = mkDefault " ";
+    battery.display.threshold = 25;
+
     battery.full_symbol = mkDefault "";
     battery.charging_symbol = mkDefault "";
     battery.discharging_symbol = mkDefault "";

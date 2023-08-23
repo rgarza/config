@@ -25,7 +25,7 @@
     keep-derivations = true;
 
     extra-platforms = lib.mkIf (pkgs.system == "aarch64-darwin") [ "x86_64-darwin" "aarch64-darwin" ];
-
+    
   };
 
   nix.package = pkgs.nixUnstable;
@@ -48,6 +48,7 @@
     for p in (string split : ${config.environment.systemPath})
       if not contains $p $fish_user_paths
         set -g fish_user_paths $fish_user_paths $p
+        
       end
     end
   '';

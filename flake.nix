@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
     nixpkgs-master.url = github:NixOS/nixpkgs/master;
-    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-22.11-darwin;
+    nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-23.05-darwin;
     nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
 
     # Environment/system management
@@ -175,6 +175,7 @@
       homeManagerModules = {
         configs-starship-symbols = import ./home/configs/starship-symbols.nix;   
         configs-neovim = import ./home/neovim.nix;
+        configs-tmux = import ./home/tmux.nix;
         # programs-neovim-extras = import ./modules/home/programs/neovim/extras.nix;
 
         home-user-info = { lib, ... }: {

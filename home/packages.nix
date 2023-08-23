@@ -8,7 +8,11 @@
       coreutils
       vim
       wget  
-      nodejs-14_x
+      nodejs-18_x
+      ffmpeg-full
+      nodePackages.aws-cdk
+      awscli2
+      nodePackages.typescript
       openjdk
       maven
       flyctl
