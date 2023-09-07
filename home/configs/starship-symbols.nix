@@ -1,6 +1,7 @@
 { lib, ... }:
 let inherit (lib) mkDefault; in
 {
+  programs.starship.enable = true;
   programs.starship.settings = {
     aws.symbol = mkDefault " ";
     battery.display.threshold = 25;

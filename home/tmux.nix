@@ -1,53 +1,50 @@
 { config, lib, pkgs, ... }:
 
 let
-  cfg = config.myHome.tmux;
 in
 {
-  options.myHome.tmux = with lib; {
-    enable = mkEnableOption "tmux";
-  };
-
-  config = lib.mkIf cfg.enable {
     programs.tmux = {
       enable = true;
-      prefix = "C-a";
-      terminal = "tmux-256color";
+      
       keyMode = "vi";
       escapeTime = 10;
       newSession = true;
-      plugins = with pkgs; [
-        tmuxPlugins.yank
-        {
-          plugin = tmuxPlugins.power-theme;
-          extraConfig = ''
-            set -g @tmux_power_theme '#99C794'
-          '';
-        }
-      ];
       extraConfig = ''
-        # TERM override
-        set terminal-overrides "xterm*:RGB"
+        set -g default-terminal "screen-256color"
 
-        # Enable mouse
+        set -g prefix C-a
+        unbind C-b
+        bind-key C-a send-prefix
+
+        unbind %
+        bind | split-window -h 
+
+        unbind '"'
+        bind - split-window -v
+
+        unbind r
+        bind r source-file ~/.tmux.conf
+
+        bind -r j resize-pane -D 5
+        bind -r k resize-pane -U 5
+        bind -r l resize-pane -R 5
+        bind -r h resize-pane -L 5
+
+        bind -r m resize-pane -Z
+
         set -g mouse on
 
-        # Pane movement shortcuts (same as vim)
-        bind h select-pane -L
-        bind j select-pane -D
-        bind k select-pane -U
-        bind l select-pane -R
+        set-window-option -g mode-keys vi
 
-        # Copy mode using 'Esc'
-        unbind [
-        bind Escape copy-mode
+        bind-key -T copy-mode-vi 'v' send -X begin-selection # start selecting text with "v"
+        bind-key -T copy-mode-vi 'y' send -X copy-selection # copy text with "y"
 
-        # Start selection with 'v' and copy using 'y'
-        bind-key -T copy-mode-vi v send-keys -X begin-selection
+        unbind -T copy-mode-vi MouseDragEnd1Pane # don't exit copy mode when dragging with mouse
 
-        # Custom
-        bind-key -r i run-shell "tmux neww cht.sh --shell"
+        # remove delay for exiting insert mode with ESC in Neovim
+        set -sg escape-time 10
+
+        # tpm plugin
       '';
     };
-  };
 }

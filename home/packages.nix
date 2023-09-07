@@ -2,11 +2,8 @@
 {
     home.packages = with pkgs; [    
       git
-      fish
       binutils
-      hugo
       coreutils
-      vim
       wget  
       nodejs-18_x
       ffmpeg-full
@@ -16,12 +13,11 @@
       openjdk
       maven
       flyctl
+      ripgrep
       postgresql_14
       docker
       docker-compose
-      yarn
       cocoapods
-      wrangler
       tmux
     ];
 }

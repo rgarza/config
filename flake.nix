@@ -168,7 +168,6 @@
      
       darwinModules = {
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
-        # security-pam = import ./modules/darwin/security/pam.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
       };
 
@@ -176,7 +175,6 @@
         configs-starship-symbols = import ./home/configs/starship-symbols.nix;   
         configs-neovim = import ./home/neovim.nix;
         configs-tmux = import ./home/tmux.nix;
-        # programs-neovim-extras = import ./modules/home/programs/neovim/extras.nix;
 
         home-user-info = { lib, ... }: {
           options.home.user-info =

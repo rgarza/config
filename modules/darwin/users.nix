@@ -22,5 +22,9 @@ in
       type = with types; nullOr string;
       default = null;
     };
+    dataHome = mkOption {
+      type = with types; nullOr string;
+      default = null;
+    };
   };
 }

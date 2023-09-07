@@ -20,6 +20,7 @@ home.file."./.config/nvim/" = {
     plugins = with pkgs.vimPlugins; [
       packer-nvim
       rose-pine
+      plenary-nvim
       lsp-zero-nvim
       trouble-nvim
       nvim-treesitter.withAllGrammars
