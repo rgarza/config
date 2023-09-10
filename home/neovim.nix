@@ -1,5 +1,5 @@
 { home, pkgs, ... }: {
-  
+
   imports = [ ];
 
 home.file."./.config/nvim/" = {
@@ -33,6 +33,7 @@ home.file."./.config/nvim/" = {
       nvim-treesitter-context
       zen-mode-nvim
       mason-nvim
+      direnv-vim
       nvim-lspconfig
       mason-lspconfig-nvim
       telescope-nvim

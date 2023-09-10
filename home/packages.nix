@@ -1,10 +1,10 @@
 { pkgs, pkgs-master, apple-silicon, ... }:
 {
-    home.packages = with pkgs; [    
+    home.packages = with pkgs; [
       git
       binutils
       coreutils
-      wget  
+      wget
       nodejs-18_x
       ffmpeg-full
       nodePackages.aws-cdk
@@ -19,5 +19,8 @@
       docker-compose
       cocoapods
       tmux
+      cargo
+      rustc
+      rustfmt
     ];
 }
