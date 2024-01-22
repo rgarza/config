@@ -24,7 +24,7 @@
         "insomnia"
         "iterm2"
         "github"
-        "font-jetbrains-mono-nerd-font"
+        "font-hack-nerd-font"
     ];
 
     environment.variables.SSH_AUTH_SOCK = "/Users/${config.users.primaryUser.username}/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh";

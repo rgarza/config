@@ -2,10 +2,10 @@
   description = "Nix system configs.";
 
   inputs = {
-    nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
+    nixpkgs.url = github:NixOS/nixpkgs/nixpkgs-unstable;
     nixpkgs-master.url = github:NixOS/nixpkgs/master;
     nixpkgs-stable.url = github:NixOS/nixpkgs/nixpkgs-23.05-darwin;
-    nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;    
+    nixpkgs-unstable.url = github:NixOS/nixpkgs/nixpkgs-unstable;
 
     # Environment/system management
     darwin.url = github:LnL7/nix-darwin;
@@ -13,7 +13,7 @@
     home-manager.url = github:nix-community/home-manager;
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
-  
+
   outputs = { nixpkgs, self, darwin, home-manager, flake-utils, ... }@inputs:
     let
 
@@ -61,15 +61,15 @@
             home-manager.useGlobalPkgs = true;
 
             home-manager.users.${primaryUser.username} = homeManagerCommonConfig;
-            
+
             # {
             #   imports = attrValues self.homeManagerModules ++ [
             #     ./home
             #   ];
             #   home.stateVersion = homeManagerStateVersion;
             #   home.user-info = config.users.primaryUser;
-            # };            
-            
+            # };
+
             nix.registry.my.flake = self;
           }
         )
@@ -78,11 +78,11 @@
     in
     {
 
-      darwinConfigurations = rec {    
+      darwinConfigurations = rec {
         bootstrap-arm = makeOverridable darwinSystem {
           system = "aarch64-darwin";
           modules = [ ./darwin/bootstrap.nix { nixpkgs = nixpkgsConfig; } ];
-        };    
+        };
 
         mb = darwinSystem {
           system = "aarch64-darwin";
@@ -105,7 +105,7 @@
           pkgs-master = import inputs.nixpkgs-master {
             inherit (prev.stdenv) system;
             inherit (nixpkgsConfig) config;
-            
+
           };
         };
         pkgs-stable = final: prev: {
@@ -120,7 +120,7 @@
             inherit (nixpkgsConfig) config;
           };
         };
-        
+
         apple-silicon = final: prev: optionalAttrs (prev.stdenv.system == "aarch64-darwin") {
           pkgs-x86 = import inputs.nixpkgs {
             system = "x86_64-darwin";
@@ -132,7 +132,7 @@
             #   })
             # );
           };
-        };   
+        };
         vimUtils = import ./overlays/vimUtils.nix;
 
         vimPlugins = final: prev:
@@ -146,7 +146,7 @@
               ]
             );
           };
-        
+
 
         # ipythonFix = self: super: {
         #   python3 = super.python3.override {
@@ -165,14 +165,14 @@
         # };
       };
 
-     
+
       darwinModules = {
         programs-nix-index = import ./modules/darwin/programs/nix-index.nix;
         users-primaryUser = import ./modules/darwin/users.nix;
       };
 
       homeManagerModules = {
-        configs-starship-symbols = import ./home/configs/starship-symbols.nix;   
+        configs-starship-symbols = import ./home/configs/starship-symbols.nix;
         configs-neovim = import ./home/neovim.nix;
         configs-tmux = import ./home/tmux.nix;
 
@@ -181,7 +181,7 @@
             (self.darwinModules.users-primaryUser { inherit lib; }).options.users.primaryUser;
         };
 
-      };      
+      };
     } // flake-utils.lib.eachDefaultSystem (system: {
       legacyPackages = import inputs.nixpkgs {
         inherit system;

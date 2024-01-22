@@ -25,17 +25,18 @@ home.file."./.config/nvim/" = {
       trouble-nvim
       nvim-treesitter.withAllGrammars
       playground
+      nvim-treesitter-textobjects
       harpoon
       refactoring-nvim
       undotree
       vim-fugitive
+      rust-tools-nvim
       nvim-treesitter-context
       nvim-treesitter-context
       zen-mode-nvim
-      mason-nvim
+      none-ls-nvim
       direnv-vim
       nvim-lspconfig
-      mason-lspconfig-nvim
       telescope-nvim
       nvim-cmp
       cmp-buffer
