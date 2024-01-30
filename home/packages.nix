@@ -26,5 +26,6 @@
       cargo
       rustc
       rustfmt
+      eza
     ];
 }

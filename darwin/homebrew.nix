@@ -3,14 +3,14 @@
     environment.shellInit =  ''
         eval "$(${config.homebrew.brewPrefix}/brew shellenv)"
     '';
-    homebrew.taps = [
-        "homebrew/cask"
-        "homebrew/cask-drivers"
-        "homebrew/cask-fonts"
-    ];
+    #homebrew.taps = [
+    #    "homebrew/cask"
+    #    "homebrew/cask-drivers"
+    #    "homebrew/cask-fonts"
+    #];
     homebrew.enable = true;
-    homebrew.onActivation.autoUpdate = true;
-    homebrew.onActivation.upgrade = true;
+    # homebrew.onActivation.autoUpdate = true;
+    # homebrew.onActivation.upgrade = true;
     homebrew.onActivation.cleanup = "zap";
     homebrew.global.brewfile = true;
     homebrew.masApps = {

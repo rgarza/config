@@ -19,7 +19,7 @@ home.file."./.config/nvim/" = {
     vimdiffAlias = true;
     plugins = with pkgs.vimPlugins; [
       packer-nvim
-      rose-pine
+      tokyonight-nvim
       plenary-nvim
       lsp-zero-nvim
       trouble-nvim
