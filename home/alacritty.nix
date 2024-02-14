@@ -1,5 +1,5 @@
 { home, pkgs, ... }: {
-    programs.alacritty = {
-        enable = true;
+    home.file.".alacritty.toml" = {
+        source = ../configs/alacritty/.alacritty.toml;
     };
 }
