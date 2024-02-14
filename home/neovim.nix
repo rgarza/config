@@ -18,25 +18,26 @@ home.file."./.config/nvim/" = {
 
     vimdiffAlias = true;
     plugins = with pkgs.vimPlugins; [
-      packer-nvim
-      tokyonight-nvim
+packer-nvim
+      nightfox-nvim
       plenary-nvim
       lsp-zero-nvim
       trouble-nvim
       nvim-treesitter.withAllGrammars
       playground
-      nvim-treesitter-textobjects
-      harpoon
+      nvim-web-devicons
+      go-nvim
       refactoring-nvim
       undotree
+      neorg
       vim-fugitive
-      rust-tools-nvim
       nvim-treesitter-context
-      nvim-treesitter-context
+      nvim-treesitter-textobjects
+      comment-nvim
       zen-mode-nvim
-      none-ls-nvim
-      direnv-vim
+      mason-nvim
       nvim-lspconfig
+      mason-lspconfig-nvim
       telescope-nvim
       nvim-cmp
       cmp-buffer
@@ -46,6 +47,10 @@ home.file."./.config/nvim/" = {
       cmp-nvim-lua
       luasnip
       friendly-snippets
+      harpoon2
+      vim-terraform
+      copilot-vim
+      lualine-nvim
     ];
   };
 }

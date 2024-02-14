@@ -6,6 +6,7 @@
       ./zsh.nix
       ./fish.nix
       ./alacritty.nix
+      ./fzf.nix
     ];
 
     programs.bat.enable = true;
