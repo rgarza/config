@@ -4,6 +4,7 @@
       git
       binutils
       coreutils
+      awscli2
       bacon
       wget
       nodejs-18_x
