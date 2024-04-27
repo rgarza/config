@@ -5,7 +5,9 @@
     shellAliases = {
       ll = "ls -l";
     };
-    enableAutosuggestions = false;
+    autosuggestion = {
+        enable = true;
+    };
     enableCompletion = false;
 
     initExtra = ''
@@ -15,7 +17,7 @@
       export PATH=$PATH:/run/current-system/sw/bin/
 
       export SSH_AUTH_SOCK=/Users/rd/Library/Containers/com.maxgoedjen.Secretive.SecretAgent/Data/socket.ssh
-      
+
 
     '';
     history = {
@@ -43,7 +45,7 @@
       };
       extraConfig = ''
         zstyle ':completion:*:*:*:*:*' menu select
-       
+
       '';
     };
 
@@ -58,7 +60,7 @@
     #       src = lib.cleanSource ../configs/zsh/p10k.zsh;
     #       file = "";
     #     }
-    #   ]; 
+    #   ];
   };
-   
+
 }
